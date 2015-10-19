@@ -20,6 +20,7 @@ function g:GetNextSignId()
     return retval
 endfunction
 
-command! BreakpointAdd :exec "!open 'codebug://send?file=%:p&line=" . line('.') . "&op=add&open=1'" | :exec ":sign place " . GetNextSignId() . " line=" . line('.') . " name=BreakpointError file=" . expand('%:p')
-command! BreakpointDelete :exec "!open 'codebug://send?file=%:p&line=" . line('.') . "&op=delete&open=1'" | :exec ":sign unplace" 
+command! BreakpointAdd :exec "silent !open --background 'codebug://send?file=%:p&line=" . line('.') . "&op=add&open=1'" | :exec ":sign place " . GetNextSignId() . " line=" . line('.') . " name=BreakpointError file=" . expand('%:p') | :exec ':redraw!'
+command! BreakpointDelete :exec "silent !open --background 'codebug://send?file=%:p&line=" . line('.') . "&op=delete&open=1'" | :exec ":sign unplace"  | :exec ':redraw!'
+
 
